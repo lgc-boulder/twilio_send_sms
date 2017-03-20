@@ -1,0 +1,77 @@
+#!/usr/bin/env ruby
+
+require 'twilio_send_sms'
+require 'optparse'
+require 'yaml'
+require 'active_support/core_ext/hash'
+
+command_line_options = {}
+
+ARGV << '-h' if ARGV.empty?
+
+OptionParser.new do |o|
+  o.banner = 'Usage: twilio_send_sms [options]' << "\n"
+
+  o.banner << 'Keys listed below should go to ~/.twilio_send_sms.yml'
+
+  o.on(
+    '-i value',
+    '--account-sid=value',
+    'Twilio Account SID. key: :account_sid '
+  ) do |x|
+    command_line_options[ :account_sid ] = x
+  end
+
+  o.on(
+    '-p value',
+    '--auth-token=value',
+    'Twilio Auth Token. key: :auth_token'
+  ) do |x|
+    command_line_options[ :auth_token ] = x
+  end
+
+  o.on(
+    '-m value',
+    '--message=value',
+    'Message'
+  ) do |x|
+    command_line_options[ :message_body ] = x
+  end
+
+  o.on(
+    '-f value',
+    '--from=value',
+    'From Phone Number.  key: :message_from'
+  ) do |x|
+    command_line_options[ :message_from ] = x
+  end
+
+  o.on(
+    '-t value',
+    '--to=value',
+    'To Phone Number.  key: :message_to'
+  ) do |x|
+    command_line_options[ :message_to ] = x
+  end
+
+  o.on( '-h', '--help', 'Show this message' ) do
+    puts o
+
+    exit
+  end
+
+end.parse!
+
+begin
+  config_file_options =
+    YAML.load_file( File.expand_path('$HOME/.twilio_send_sms.yml') )
+
+rescue Errno::ENOENT
+  config_file_options = {}
+end
+
+options = config_file_options.
+  merge( command_line_options ).
+  with_indifferent_access
+
+TwilioSendSms.send_sms( options )
