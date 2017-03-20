@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'twilio_send_sms'
-  s.version = '0.0.1'
+  s.version = '0.0.1.1'
   s.date = '2017-03-20'
   s.summary = 'Adds a command to send an sms from the command line'
   s.description = s.summary
