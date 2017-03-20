@@ -64,7 +64,7 @@ end.parse!
 
 begin
   config_file_options =
-    YAML.load_file( File.expand_path('$HOME/.twilio_send_sms.yml') )
+    YAML.load_file( File.expand_path('~/.twilio_send_sms.yml') )
 
 rescue Errno::ENOENT
   config_file_options = {}
