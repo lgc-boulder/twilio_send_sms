@@ -15,7 +15,7 @@ OptionParser.new do |o|
   o.banner << 'Keys listed below should go to ~/.twilio_send_sms.yml'
 
   o.on(
-    '-i value',
+    '-u value',
     '--account-sid=value',
     'Twilio Account SID. key: :account_sid '
   ) do |x|
