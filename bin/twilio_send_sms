@@ -75,3 +75,5 @@ options = config_file_options.
   with_indifferent_access
 
 TwilioSendSms.send_sms( options )
+
+puts "SMS sent to #{ options[:message_to] }"
