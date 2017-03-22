@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.homepage = 'https://rubygems.org/gems/twilio_send_sms'
   s.license = 'MIT'
 
-  s.add_dependency 'activesupport'
+  s.add_dependency 'activesupport', '~> 4.0'
   s.add_dependency 'twilio-ruby', '~> 4.0'
 
   s.executables << 'twilio_send_sms'
