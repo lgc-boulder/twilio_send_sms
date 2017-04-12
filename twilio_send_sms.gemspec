@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'pry'
+  s.add_development_dependency 'pry-remote'
 
   s.executables << 'twilio_send_sms'
 end
