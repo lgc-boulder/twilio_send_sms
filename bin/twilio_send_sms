@@ -7,7 +7,7 @@ require 'active_support/core_ext/hash'
 
 command_line_options = {}
 
-ARGV << '-h' if ARGV.empty?
+ARGV << '--help' if ARGV.empty?
 
 OptionParser.new do |o|
   o.banner = 'Usage: twilio_send_sms [options]' << "\n"
