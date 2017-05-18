@@ -8,13 +8,23 @@ describe 'the twilio_send_sms command' do
     expect( result ).to eq( help_message )
   end
 
-  it 'sends a message if called with the -m flag and a config file present'
-  it 'sends a message if called with all the flags present'
+  it 'sends a message if called with the -m flag and a config file present' do
+    result = perform_command_with_args( '-m "hello world"' )
+
+    expect( command_status_code ).to eq(0)
+  end
 
   def perform_command_with_args( command_line_args )
-    stdin, stdout, stderr = Open3.popen3(
-      "./bin/twilio_send_sms #{command_line_args}"
+    stdin, stdout, stderr, @wait_thr = Open3.popen3(
+      "HOME='#{ fake_home_path }'" +
+      " RUBYLIB='./spec/support/fake/gems/twilio-ruby/lib'" +
+      " ./bin/twilio_send_sms #{command_line_args}"
     )
+
+    error = stderr.read
+    if error.present?
+      raise "Encountered error while running command:\n\n#{error}"
+    end
 
     stdout.read
   end
@@ -30,5 +40,13 @@ Keys listed below should go to ~/.twilio_send_sms.yml
     -t, --to=value                   To Phone Number.  key: :message_to
     -h, --help                       Show this message
     end_of_string
+  end
+
+  def command_status_code
+    @wait_thr.value
+  end
+
+  def fake_home_path
+    File.join( File.expand_path('.'), 'spec', 'support', 'fake', 'home' )
   end
 end

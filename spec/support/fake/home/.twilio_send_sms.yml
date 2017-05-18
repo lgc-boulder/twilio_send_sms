@@ -1,0 +1,4 @@
+account_sid: arbitrary
+auth_token: arbitrary
+message_from: "arbitrary"
+message_to: "arbitrary"
