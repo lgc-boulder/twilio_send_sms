@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 
-require 'twilio_send_sms'
+require_relative '../lib/twilio_send_sms'
 require 'optparse'
 require 'yaml'
 require 'active_support/core_ext/hash'
+require 'pry'
+require 'pry-remote'
 
 command_line_options = {}
 

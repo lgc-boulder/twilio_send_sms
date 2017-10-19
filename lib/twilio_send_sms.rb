@@ -1,4 +1,6 @@
 require 'twilio-ruby'
+require 'active_support'
+require 'active_support/core_ext/class'
 
 class TwilioSendSms
   def self.send_sms(options)
